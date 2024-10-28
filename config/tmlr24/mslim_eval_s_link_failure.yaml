@@ -1,0 +1,44 @@
+# DEFAULT parameters
+name: "DEFAULT"   # MUST BE 'DEFAULT'
+path: "../packerl_out"   # location to save results in
+iterations: 1
+repetitions: 16
+reps_per_job: 8
+reps_in_parallel: 8
+
+params:
+  use_wandb: true
+  actor_critic_mode: "link_weight_gaussian"
+  actor_mode: "magnneto_slim"
+  global_features: "none"
+  edge_features: "LU"
+  link_weights_as_input: True
+  initial_exploration_coeff: -1.0
+  synnet_presets:
+    train:
+      topology:
+        graph: "random_XS"
+      events:
+        traffic: flex
+
+grid:
+  synnet_custom_cfg:
+    eval:
+      events:
+        traffic:
+          prob_tcp: [ 0, 0.5, 1.0 ]
+          traffic_scaling: [ 0.25, 0.75, 1.5, 3.0 ]
+
+---
+
+name: "mslim_eval_s_lf"
+
+params:
+  load_experiment: "mslim_train_xs"
+  training_iterations: 0
+  synnet_presets:
+    eval:
+      topology:
+        graph: "random_S"
+      events:
+        link_failures: "weibull_easy"

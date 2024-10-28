@@ -1,0 +1,3 @@
+min_nodes: 11
+max_nodes: 25
+mode: [ "erdos_renyi", "watts_strogatz", "barabasi_albert" ]

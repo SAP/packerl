@@ -1,0 +1,8 @@
+fixed_attributes: False  # Whether all nodes and edges will have standard, fixed attributes
+node_traffic_pos_factor: 10.0  # Maximum possible positional node weight is this factor times the minimum
+node_traffic_deg_factor: 10.0  # Maximum possible degree node weight is this factor times the minimum
+lambda_deg_weight: 0.6  # Determine node weight: (1.0) only using its degree <-> only using its centrality (0.0)
+edge_weight_min: 50_000_000  # in bps
+edge_weight_med: 100_000_000  # in bps
+edge_weight_max: 200_000_000  # in bps
+delay_avg: 5  # average link delay in ms

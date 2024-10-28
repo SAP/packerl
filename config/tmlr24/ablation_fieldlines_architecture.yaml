@@ -1,0 +1,126 @@
+# DEFAULT parameters
+name: "DEFAULT"   # MUST BE 'DEFAULT'
+path: "../packerl_out"   # location to save results in
+iterations: 1
+repetitions: 16
+reps_per_job: 8
+reps_in_parallel: 8
+
+params:
+  use_wandb: true
+  spf_pretraining: 5
+  reward_preset: "r"
+
+list:
+  synnet_custom_cfg:
+    train:
+      events:
+        traffic:
+          prob_tcp: [ 0, 0, 1.0, 1.0 ]
+          traffic_scaling: [0.75, 3.0, 0.75, 3.0]
+    eval:
+      events:
+        traffic:
+          prob_tcp: [ 0, 0, 1.0, 1.0 ]
+          traffic_scaling: [0.75, 3.0, 0.75, 3.0]
+
+---
+
+name: "fieldlines_arch_default"
+
+params:
+  use_n_last_obs: 4
+  nn:
+    latent_dimension: 12
+    base:
+      scatter_reduce: [ "mean", "min" ]
+      stack:
+        num_steps: 2
+---
+
+name: "fieldlines_arch_dim6"
+
+params:
+  nn:
+    latent_dimension: 6
+
+---
+
+name: "fieldlines_arch_dim24"
+
+params:
+  nn:
+    latent_dimension: 24
+
+---
+
+name: "fieldlines_arch_aggmin"
+
+params:
+  nn:
+    base:
+      scatter_reduce: [ "min" ]
+
+---
+
+name: "fieldlines_arch_aggmean"
+
+params:
+  nn:
+    base:
+      scatter_reduce: [ "mean" ]
+
+---
+
+name: "fieldlines_arch_aggmax"
+
+params:
+  nn:
+    base:
+      scatter_reduce: [ "max" ]
+
+---
+
+name: "fieldlines_arch_aggminmax"
+
+params:
+  nn:
+    base:
+      scatter_reduce: [ "min", "max" ]
+
+---
+
+name: "fieldlines_arch_nostack"
+
+params:
+  use_n_last_obs: 1
+
+---
+
+name: "fieldlines_arch_1step"
+
+params:
+  nn:
+    base:
+      stack:
+        num_steps: 1
+
+---
+
+name: "fieldlines_arch_3step"
+
+params:
+  nn:
+    base:
+      stack:
+        num_steps: 3
+
+---
+
+name: "fieldlines_arch_4step"
+
+params:
+  nn:
+    base:
+      stack:
+        num_steps: 4

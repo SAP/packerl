@@ -1,0 +1,34 @@
+# DEFAULT parameters
+name: "DEFAULT"   # MUST BE 'DEFAULT'
+path: "../packerl_out"   # location to save results in
+iterations: 1
+repetitions: 1
+reps_per_job: 8
+reps_in_parallel: 8
+
+params:
+  use_wandb: true
+
+grid:
+  synnet_custom_cfg:
+    eval:
+      events:
+        traffic:
+          prob_tcp: [ 0, 0.5, 1.0 ]
+          traffic_scaling: [0.25, 0.75, 1.5, 3.0]
+
+list:
+  routing_mode: ["magnneto1", "magnneto2", "magnneto3", "magnneto4",
+                  "magnneto5", "magnneto6", "magnneto7", "magnneto8",
+                  "magnneto9", "magnneto10", "magnneto11", "magnneto12",
+                  "magnneto13", "magnneto14", "magnneto15", "magnneto16"]
+
+---
+
+name: "magnneto_m"
+
+params:
+  synnet_presets:
+    eval:
+      topology:
+        graph: "random_M"

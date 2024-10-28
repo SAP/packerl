@@ -1,0 +1,5 @@
+mode: "magnneto"
+mode_configs:
+  magnneto:
+    data_dir: "data"  # directory where the graph zoo data is stored
+    networks: [ "NSFNet", "GEANT2" ]  # list of network topologies to load (random choice)

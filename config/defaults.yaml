@@ -1,0 +1,153 @@
+# ==============================================================================
+# === this file contains default config values for all PackeRL experiments. ===
+# ==============================================================================
+
+
+# FRAMEWORK PARAMETERS
+# ====================
+sim_timeout: 300  # run will terminate if python spends that many seconds waiting for ns-3 to fill the shared mem
+log_level: "none"  # logging mode for program logs (NS3 and python). Choice options are the log severity levels of ns3
+ns3_log_modules: ["PackerlSim", "PackerlEnv"]  # ns3 modules for which things get logged to the console if the level is more than "none"
+build_ns3: false  # if specified, start ns3-ai experiments by re-building ns3
+profiling_py: false  # if specified, profile the execution of the run on the python side, and store the results in a file called profiling_py.prof
+profiling_cpp: false  # if specified, profile the execution of each run on the C++ side, and store the results in one file per run called profiling_cpp_run<id>.data
+debug_cpp: false  # if specified, interrupt the program flow briefly after the first reset to give the opportunity to attach gdb to the ns3 process
+
+
+# GENERAL PARAMETERS
+# ==================
+ep_length: 100  # number of simulation steps per episode
+ms_per_step: 5  # network time simulated per step (in milliseconds)
+packet_size: 1472  # in bytes. Max. is 1500 (standard MTU) - 20 (IP header) - 8 (ICMP header) = 1472
+use_flow_control: false  # whether to use traffic control layer and queue discs on nodes/net devices in ns-3
+use_tcp_sack: false  # whether to use TCP SACK in the ns-3 simulation
+ospfw_ref_value: 100000000  # OSPF reference datarate value for calculating link weights (standard: 1e8)
+eigrp_ref_datarate: 10000000  # EIGRP reference datarate value for calculating link weights (standard: 1e7)
+eigrp_ref_delay: 10  # EIGRP reference delay value for calculating link weights (standard: 10)
+eigrp_ref_multiplier: 256  # EIGRP reference multiplier value for calculating link weights
+routing_mode: "learned"  # train/eval. a routing policy in pytorch ("learned"), or eval. any of the provided baselines (baselines.baseline_modes)
+sp_mode: "eigrp"  # Which method to use to obtain shortest paths, and their distances usable as auxiliary features. options: "ospf" and "eigrp"
+device: "cpu"  # desired device for pytorch models and tensors
+load_experiment: ""  # if specified, load the model from the given experiment's output dir (e.g. for evaluation)
+load_mode: "last"  # which model to load from the experiment's output dir. options: ["initial", "best_training", "best_rollout", "best_validation", "last"]
+seed_offset: 0  # offset for the random seed used in the experiment
+
+
+# TRAINING ALGORITHM
+# ==================
+training_iterations: 100  # number of training iterations
+spf_pretraining: 0  # number of iterations pretraining on experiences from an spf baseline (they are also counted towards training_iterations!)
+episodes_per_rollout: 16  # number of rollout episodes per iteration
+num_minibatches: 4  # the number of mini-batches, used during policy updates. Minibatch size = steps_per_episide * episodes_per_rollout / num_minibatches
+update_epochs: 10  # how often to update the policy after a rollout phase (per minibatch)
+learning_rate: 5.0e-5
+discount_factor: 0.99
+global_reward_ratio: 1.0  # ratio of global to local reward in total reward awarded to agents (1.0: global only, 0.0: local only)
+epsilon_decay: 0.98  # decay factor for epsilon-greedy exploration
+min_epsilon: 0.01  # minimum exploration probability for epsilon-greedy
+
+# PPO-specific parameters
+clip_range: 0.2
+max_grad_norm: 0.5
+entropy_coefficient: 0.0
+value_function_coefficient: 0.5
+gae_lambda: 0.95
+value_function_clip_range: 0.2
+
+
+# TRAINING ABLATIONS
+# ==================
+obs_mode: "global"  # representation of observation
+use_n_last_obs: 1  # number of last observations to use for the observation (will be concatenated)
+global_features: "load_dj_srdr"  # options: see get_global_features() in features.feature_presets.global_presets
+node_features: "none"  # options: see get_node_features() in features.feature_presets.node_presets
+edge_features: "load_config_srd"  # options: see get_edge_features() in features.feature_presets.edge_presets
+actor_critic_mode: "next_hop_softmax"  # options: see rl/nn/actor_critic/__init__.py
+link_weights_as_input: False  # only applicable to link-weight based policies: if True, the past link weights are used as additional input feature
+link_weights_as_input_mode: "ones"  # "ones" or "random"
+actor_mode: "fieldlines"  # options: learnable actors (rl/nn/actor/__init__.py)
+critic_mode: "mpn"  # options: learnable critics (rl/nn/critic/__init__.py)
+value_scope: "graph"  # how to calculate the value function.
+reward_preset: "rdwj"  # options: see get_reward_preset() in reward.reward_functions.__init__.py
+concat_rev_edges: false  # if true, for each edge of the policy input, concatenates the features of the reverse edge
+probabilistic_routing: false  # if true, OddNodes are provided outInterface distributions instead of discrete values
+reward_normalization_mode: "none"  # how to normalize rewards. Options: ["none", "rms"]
+obs_normalization_mode: "rms"  # how to normalize observations. Options: ["none", "naive", "rms"]. "none" will break with some feature presets!
+initial_exploration_coeff: -4.0  # A learnable coefficient used to steer the exploration
+
+
+# NN PARAMETERS
+# =============
+nn:
+  latent_dimension: 12
+  base:
+    scatter_reduce: [ "mean", "min" ]  # which scatter reducers to use.
+    # May be a single element of ["mean", "sum", "max", "min"] or a list of these for multiple scatter operation.
+    create_graph_copy: True  # whether to create a copy of the used graph before the forward pass or not
+    assert_graph_shapes: False  # whether to assert correct shapes for the graph before each forward pass or not
+    use_homogeneous_graph: False  # whether to use a homogeneous graph for heterogeneous problems
+    flip_edges_for_nodes: False  # whether to flip edge indices for the node embedding updates
+    stack:
+      layer_norm: inner   # which kind of layer normalization to use. null/None for no layer norm,
+      # "outer" for layer norm around each full message passing step, "inner" for layer norm after each message
+      residual_connections: inner  # same as layer_norm, but for residual connections
+      num_steps: 2  # number of message passing Steps to use
+      mlp:
+        activation_function: leakyrelu
+        num_layers: 2
+        add_output_layer: False
+        regularization:
+          dropout: 0
+          spectral_norm: False
+          latent_normalization: null
+
+
+# EVALUATION
+# ==========
+evaluate_every: 10  # evaluate every N training iterations
+evaluation_episodes: 16  # number of episodes simulated every time we evaluate
+vis_first_n_evals: 0  # visualize the first X evaluation episodes
+eval_seed: 9000  # seed for the evaluation
+final_eval_seed: 9001  # seed for the final evaluation
+final_eval_episodes: 100  # number of episodes simulated in the final evaluation
+vis_first_n_final_evals: 3  # visualize the first X final evaluation episodes
+
+
+# VISUALIZATION AND LOGGING
+# =========================
+use_wandb: false  # if true: log to Weights and Biases
+visualize_at_all: false  # if true: visualize eval episodes (see above)
+wandb_entity: ""
+rendering:  # parameters for the env's render method
+  full_step_vis: False  # if False, only vis. monitoring and routing decisions. Else, also vis. features and actor out
+  node_spacing: 3.5  # node spacing in graph visualization
+  penwidth: 3  # stroke width
+  node_fontsize: 12  # font size for rest of node label
+  edge_fontsize: 8  # font size for edge label
+  edge_arrow_size: 1  # size of edge arrowheads in graph visualization
+  edge_label_dist: 3  # distance from edge start/end point for tail/head labels
+  edge_label_angle: 30  # counter-clockwise placement angle from edge inception angle
+  plot_annotation_fontsize: 6  # font size for annotations in plotted statistic (e.g. packet/byte stats)
+
+
+# SCENARIO GENERATION USING scenarios module (for explanation, see details/documentation of that package)
+# ============================
+scenario_presets:
+  train:
+    topology:
+      graph: "random_XS"
+      attributes: default
+    events:
+      traffic: flex
+      link_failures: default  # == none
+  eval:
+    topology:
+      graph: "random_XS"
+      attributes: default
+    events:
+      traffic: flex
+      link_failures: default  # == none
+
+scenario_custom_cfg:
+  train: {}
+  eval: {}

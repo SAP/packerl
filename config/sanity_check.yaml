@@ -1,0 +1,61 @@
+# DEFAULT parameters
+name: "DEFAULT"   # MUST BE 'DEFAULT'
+path: "../packerl_out"   # location to save results in
+params:
+  log_level: "info"
+  ep_length: 10  # length of an episode
+  training_iterations: 2  # number of training iterations
+  episodes_per_rollout: 2  # number of rollout episodes per iteration
+  evaluate_every: 1  # evaluate every N training iterations
+  evaluation_episodes: 1  # number of episodes simulated every time we evaluate
+  final_eval_episodes: 3  # number of episodes simulated in the final evaluation
+
+---
+
+name: "sanity_check"
+
+repetitions: 1  # number of times one set of parameters is run
+reps_per_job: 1  # number of repetitions in each job
+reps_in_parallel: 1  # number of repetitions in each job that are executed in parallel. set this to reps_per_job.
+
+---
+
+name: "sanity_check_cuda"
+
+params:
+  device: "cuda"
+
+repetitions: 1  # number of times one set of parameters is run
+reps_per_job: 1  # number of repetitions in each job
+reps_in_parallel: 1  # number of repetitions in each job that are executed in parallel. set this to reps_per_job.
+
+---
+
+name: "sanity_check_parallel"
+
+list:
+  routing_mode: ["learned", "spf"]
+
+repetitions: 2  # number of times one set of parameters is run
+reps_per_job: 4  # number of repetitions in each job
+reps_in_parallel: 4  # number of repetitions in each job that are executed in parallel. set this to reps_per_job.
+
+---
+
+name: "sanity_check_wandb_vis"
+
+params:
+  use_wandb: true
+  visualize_at_all: true
+  scenario_presets:
+    eval:
+      topology:
+        graph: random_XS
+
+list:
+  actor_critic_mode: ["next_hop_softmax", "link_weight_gaussian"]
+  actor_mode: ["fieldlines", "magnneto_slim"]
+
+repetitions: 2  # number of times one set of parameters is run
+reps_per_job: 4  # number of repetitions in each job
+reps_in_parallel: 4  # number of repetitions in each job that are executed in parallel. set this to reps_per_job.

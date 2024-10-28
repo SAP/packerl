@@ -1,0 +1,8 @@
+[submodule "ns3"]
+	path = ns3
+	url = https://gitlab.com/flunzmas/ns-3-dev.git
+	branch = packerl_tmlr24
+[submodule "ns3-ai"]
+	path = ns3-ai
+	url = https://github.com/geometric-networking/ns3-ai.git
+	branch = packerl_tmlr24

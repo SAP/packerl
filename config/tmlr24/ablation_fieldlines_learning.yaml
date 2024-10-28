@@ -1,0 +1,85 @@
+# DEFAULT parameters
+name: "DEFAULT"   # MUST BE 'DEFAULT'
+path: "../packerl_out"   # location to save results in
+iterations: 1
+repetitions: 16
+reps_per_job: 8
+reps_in_parallel: 8
+
+params:
+  use_wandb: true
+  use_n_last_obs: 4
+  reward_preset: "r"
+
+list:
+  synnet_custom_cfg:
+    train:
+      events:
+        traffic:
+          prob_tcp: [ 0, 0, 1.0, 1.0 ]
+          traffic_scaling: [0.75, 3.0, 0.75, 3.0]
+    eval:
+      events:
+        traffic:
+          prob_tcp: [ 0, 0, 1.0, 1.0 ]
+          traffic_scaling: [0.75, 3.0, 0.75, 3.0]
+
+---
+
+name: "fieldlines_learning_default"
+
+params:
+  learning_rate: 5.0e-5
+  discount_factor: 0.99
+  initial_exploration_coeff: -4.0
+  spf_pretraining: 5
+
+---
+
+
+name: "fieldlines_learning_big_alpha"
+
+params:
+  learning_rate: 3.0e-4
+
+---
+
+name: "fieldlines_learning_small_alpha"
+
+params:
+  learning_rate: 1.0e-5
+
+---
+
+name: "fieldlines_learning_heavy_discount"
+
+params:
+  discount_factor: 0.97
+
+---
+
+name: "fieldlines_learning_light_discount"
+
+params:
+  discount_factor: 0.995
+
+---
+
+name: "fieldlines_learning_high_ec"
+
+params:
+  initial_exploration_coeff: -1.0
+
+---
+
+name: "fieldlines_learning_low_ec"
+
+params:
+  initial_exploration_coeff: -7.0
+
+---
+
+name: "fieldlines_learning_no_pretraining"
+
+params:
+  spf_pretraining: 0

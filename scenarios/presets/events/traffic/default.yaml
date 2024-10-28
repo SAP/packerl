@@ -1,0 +1,8 @@
+prob_tcp: 0.8  # probability of traffic demand being TCP (instead of UDP)
+traffic_scaling: 1.5  # scaling factor for the traffic demand size
+flow_size_tradeoff: 0.5  # from 0.0 (more but smaller flows) to 1 (fewer but larger flows)
+max_demand_size: 1_000_000_000_000  # maximum size of a demand in bytes (distribution cut-off)
+max_demand_interarrival_time: 50  # maximum time between two demands in milliseconds (distribution cut-off)
+demand_size_distribution_scale: 10  # scale parameter of the demand size distribution (i.e. minimum flow size)
+demand_size_distribution_shape_base: 0.4  # shape parameter of the demand size distribution
+demand_interarrival_distribution_shape: 1.5  # shape parameter of the demand interarrival time distribution

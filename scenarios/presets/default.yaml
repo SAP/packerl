@@ -1,0 +1,6 @@
+# Default preset for the generator. These may be overridden by external programs
+seed: 1234  # rng seed
+packet_size: 1472  # bytes per packet. 1472 = MTU - IP header - ICMP header
+scenario_length: 40  # number of timesteps in the scenario
+ms_per_step: 3.0  # in ms, also scales traffic volume
+rng_uniform_deviation: 0.1  # sample uniform from [1-deviation, 1+deviation]

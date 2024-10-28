@@ -1,0 +1,4 @@
+mode: "simple"
+mode_configs:
+  simple:
+    num_failures: 5

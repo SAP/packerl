@@ -1,0 +1,27 @@
+# DEFAULT parameters
+name: "DEFAULT"   # MUST BE 'DEFAULT'
+path: "../packerl_out"   # location to save results in
+iterations: 1
+repetitions: 16
+reps_per_job: 8
+reps_in_parallel: 8
+
+params:
+  use_wandb: true
+  use_n_last_obs: 4
+  spf_pretraining: 5
+  reward_preset: "r"
+  synnet_presets:
+      events:
+        traffic: flex
+
+---
+
+name: "fieldlines_train_xs"
+
+params:
+  final_eval_episodes: 0  # training only
+  synnet_presets:
+    train:
+      topology:
+        graph: "random_XS"

@@ -1,0 +1,5 @@
+mode: "weibull"
+mode_configs:
+  weibull:
+    scale: 1.0e-3
+    shape: 0.8

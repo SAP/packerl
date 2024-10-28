@@ -1,0 +1,104 @@
+# DEFAULT parameters
+name: "DEFAULT"   # MUST BE 'DEFAULT'
+path: "../packerl_out"   # location to save results in
+iterations: 1
+repetitions: 16
+reps_per_job: 8
+reps_in_parallel: 8
+
+params:
+  use_wandb: true
+  use_n_last_obs: 4
+  spf_pretraining: 5
+
+list:
+  synnet_custom_cfg:
+    train:
+      events:
+        traffic:
+          prob_tcp: [ 0, 0, 1.0, 1.0 ]
+          traffic_scaling: [0.75, 3.0, 0.75, 3.0]
+    eval:
+      events:
+        traffic:
+          prob_tcp: [ 0, 0, 1.0, 1.0 ]
+          traffic_scaling: [0.75, 3.0, 0.75, 3.0]
+
+---
+
+name: "fieldlines_objective_default"
+
+params:
+  reward_preset: "r"
+
+---
+
+
+name: "fieldlines_objective_lu"
+
+params:
+  reward_preset: "l"
+
+---
+
+
+name: "fieldlines_objective_dropratio"
+
+params:
+  reward_preset: "d"
+
+---
+
+
+name: "fieldlines_objective_avgdelay"
+
+params:
+  reward_preset: "a"
+
+---
+
+
+name: "fieldlines_objective_rd"
+
+params:
+  reward_preset: "rd"
+
+---
+
+
+name: "fieldlines_objective_ra"
+
+params:
+  reward_preset: "ra"
+
+---
+
+
+name: "fieldlines_objective_rdj"
+
+params:
+  reward_preset: "rdj"
+
+---
+
+
+name: "fieldlines_objective_rda"
+
+params:
+  reward_preset: "rda"
+
+---
+
+
+name: "fieldlines_objective_rdt"
+
+params:
+  reward_preset: "rdt"
+
+---
+
+
+name: "fieldlines_objective_rdl"
+
+params:
+  reward_preset: "rdl"

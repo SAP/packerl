@@ -1,0 +1,27 @@
+name: packerl
+channels:
+  - conda-forge
+  - pyg
+  - pytorch
+dependencies:
+  - graphviz
+  - python=3.9
+  - pip=23.2.1
+  - pip:
+      - numpy<2
+      - torch==2.0.1 --index-url https://download.pytorch.org/whl/cpu
+      - torch-geometric==2.3.1
+      - torch-scatter==2.1.2 -f https://data.pyg.org/whl/torch-2.0.0+cpu.html
+      - cw2>=2.5
+      - flatdict
+      - pydot
+      - wandb
+      - tqdm
+      - networkx
+      - matplotlib
+      - geopy
+      - scipy
+      - pydantic
+      - pyproj
+      - pytest
+      - pyyaml

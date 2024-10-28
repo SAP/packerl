@@ -1,0 +1,7 @@
+mode: "none"  # By default, no link failures
+mode_configs:
+  simple: # Simple mode for generating link failures evenly spaced out over the time steps
+    num_failures: 1
+  weibull: # Generating link failure times using a Weibull distribution
+    scale: 1.0e-3
+    shape: 0.8

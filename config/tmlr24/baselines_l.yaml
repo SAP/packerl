@@ -1,0 +1,31 @@
+# DEFAULT parameters
+name: "DEFAULT"   # MUST BE 'DEFAULT'
+path: "../packerl_out"   # location to save results in
+iterations: 1
+repetitions: 1
+reps_per_job: 8
+reps_in_parallel: 8
+
+params:
+  log_level: "none"
+  use_wandb: true
+  synnet_presets:
+    eval:
+      topology:
+        graph: "random_L"
+
+grid:
+  synnet_custom_cfg:
+    eval:
+      events:
+        traffic:
+          prob_tcp: [ 0, 0.5, 1.0 ]
+          traffic_scaling: [ 0.25, 0.75, 1.5, 3.0 ]
+
+---
+
+name: "eigrp_l"
+
+params:
+  routing_mode: "spf"
+  sp_mode: "eigrp"

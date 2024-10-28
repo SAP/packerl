@@ -1,0 +1,18 @@
+min_nodes: 6  # minimum number of nodes in the network (only applicable to random graph generators)
+max_nodes: 100  # maximum number of nodes in the network (only applicable to random graph generators)
+mode: [ "erdos_renyi", "watts_strogatz", "barabasi_albert" ]  # can be single str or list of str
+mode_configs:
+  erdos_renyi:
+    num_attachments: 3  # average node degree in the resulting graph
+  watts_strogatz:
+    num_attachments: 4
+    rewire_probability: 0.3  # probability of rewiring each edge
+  barabasi_albert:
+    num_attachments: 2
+  topology_zoo: # load network topologies from the topology zoo data set
+    in_order: True  # if True, the topologies are loaded in alphabetical order (re-starting if the end is reached)
+    data_dir: "data"  # directory where the graph zoo data is stored
+    network: "all"  # if not 'all', only load the specified network
+  magnneto: # load network topologies from the MAGNNETO publication
+    data_dir: "data"  # directory where the graph zoo data is stored
+    networks: [ "NSFNet", "GEANT2" ]  # list of network topologies to load (random choice)
