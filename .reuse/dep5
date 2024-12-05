@@ -24,6 +24,18 @@ Disclaimer: The code in this project may include calls to APIs ("API Calls") of
  you any rights to use or access any SAP External Product, or provide any third
  parties the right to use of access any SAP External Product, through API Calls.
 
+Files: ns3/*
+Copyright:
+License:
+
+Files: ns3-ai/*
+Copyright:
+License: GPL-2.0-or-later
+
+Files: ns3-packerl/*
+Copyright:
+License:
+
 Files: *
-Copyright:  2024 SAP SE or an SAP affiliate company and packerl contributors
-License: Apache-2.0
+Copyright: 2024 SAP SE or an SAP affiliate company and packerl contributors
+License: GPL-3.0-or-later
