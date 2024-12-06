@@ -25,15 +25,15 @@ Disclaimer: The code in this project may include calls to APIs ("API Calls") of
  parties the right to use of access any SAP External Product, through API Calls.
 
 Files: baselines/magnneto/actor.py baselines/magnneto/environment.py
-Copyright:
+Copyright: !!tbd
 License: MIT
 
 Files: ns3/*
-Copyright:
-License:
+Copyright: !!tbd
+License: GPL-2.0-or-later
 
 Files: ns3-ai/*
-Copyright:
+Copyright: !!tbd
 License: GPL-2.0-or-later
 
 Files: ns3-packerl/utils/ryml_all.hpp
@@ -41,11 +41,11 @@ Copyright: Copyright (c) 2018, Joao Paulo Magalhaes <dev@jpmag.me>
 License: MIT
 
 Files: ns3-packerl/*
-Copyright:
-License:
+Copyright: !tbd
+License: GPL-2.0-or-later
 
 Files: rl/nn/hmpn/*
-Copyright:
+Copyright: !tbd
 License: MIT
 
 Files: *
