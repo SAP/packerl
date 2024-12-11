@@ -24,22 +24,22 @@ Disclaimer: The code in this project may include calls to APIs ("API Calls") of
  you any rights to use or access any SAP External Product, or provide any third
  parties the right to use of access any SAP External Product, through API Calls.
 
-Files: baselines/magnneto/actor.py baselines/magnneto/environment.py
-Copyright: 2024, BNN-UPC <guillermo.bernardez@upc.edu>
-License: MIT
+Files: *
+Copyright: 2024 SAP SE or an SAP affiliate company and packerl contributors
+License: GPL-3.0-or-later
 
-Files: ns3-packerl/utils/ryml_all.hpp
-Copyright: 2018, Joao Paulo Magalhaes <dev@jpmag.me>
+Files: rl/nn/hmpn/*
+Copyright: 2023, Niklas Freymuth <niklas.freymuth@kit.edu>
 License: MIT
 
 Files: ns3-packerl/*
 Copyright: 2024 SAP SE or an SAP affiliate company and packerl contributors
 License: GPL-2.0-or-later
 
-Files: rl/nn/hmpn/*
-Copyright: 2023, Niklas Freymuth <niklas.freymuth@kit.edu>
+Files: ns3-packerl/utils/ryml_all.hpp
+Copyright: 2018, Joao Paulo Magalhaes <dev@jpmag.me>
 License: MIT
 
-Files: *
-Copyright: 2024 SAP SE or an SAP affiliate company and packerl contributors
-License: GPL-3.0-or-later
+Files: baselines/magnneto/actor.py baselines/magnneto/environment.py
+Copyright: 2024, BNN-UPC <guillermo.bernardez@upc.edu>
+License: MIT
