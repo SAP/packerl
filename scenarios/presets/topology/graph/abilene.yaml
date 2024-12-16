@@ -1,4 +1,0 @@
-mode: "topology_zoo"
-mode_configs:
-  topology_zoo:
-    network: "Abilene"

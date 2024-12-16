@@ -1,4 +1,4 @@
-name: packerl
+name: packerl_sap
 channels:
   - conda-forge
   - pyg
